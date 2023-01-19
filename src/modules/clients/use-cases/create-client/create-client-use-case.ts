@@ -1,5 +1,6 @@
 import { prisma } from "../../../../lib/prisma"
 import { hash } from 'bcryptjs'
+import { ApiError } from "../../../../errors/api-errors"
 
 interface ICreateClient {
   password: string
@@ -16,7 +17,7 @@ export class CreateClientUseCase {
     })
 
     if (clientExist) {
-      throw new Error('Client already exists.')
+      throw new ApiError(409, 'Client already exists.')
     }
 
     const salt = 8

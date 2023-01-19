@@ -1,7 +1,7 @@
 import { prisma } from "../../../lib/prisma"
 import { sign } from 'jsonwebtoken'
 import { compare } from "bcryptjs"
-import { ApiError } from "../../../utils/api-errors"
+import { ApiError } from "../../../errors/api-errors"
 
 interface IAuthenticateClient {
   username: string
