@@ -1,7 +1,7 @@
 import { prisma } from "../../../lib/prisma"
 import { sign } from 'jsonwebtoken'
 import { compare } from "bcryptjs"
-import { env } from 'process'
+import { ApiError } from "../../../utils/api-errors"
 
 interface IAuthenticateClient {
   username: string
@@ -18,13 +18,13 @@ export class AuthenticateClientUseCase {
     })
 
     if (!client) {
-      throw new Error('Username or password incorrect.')
+      throw new ApiError(400, 'Username or password incorrect.');
     }
 
     const passwordMatch = await compare(password, client.password)
 
     if (!passwordMatch) {
-      throw new Error('Username or password incorrect.')
+      throw new ApiError(400, 'Username or password incorrect.')
     }
 
     const token = sign({username}, '4252e1e7c810abafc59e35c675dbd086', {
