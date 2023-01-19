@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const authDeliverymanBodyVaidation = z.object({
+export const authClientBodyVaidation = z.object({
   username: z.string(),
   password: z.string()
 })
